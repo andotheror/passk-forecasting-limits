@@ -1,0 +1,798 @@
+\documentclass[twoside]{article}
+
+\usepackage[preprint]{aistats2027}
+\usepackage[round,authoryear]{natbib}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{balance}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{url}
+
+\bibliographystyle{apalike}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pcal}{\mathcal P}
+\newcommand{\TV}{\operatorname{TV}}
+\newcommand{\diam}{\operatorname{diam}}
+
+\begin{document}
+
+\twocolumn[
+\aistatstitle{Supplement to ``Extrapolation Is an Assumption: Sharp Limits for Pass@k Forecasting''}
+
+\aistatsauthor{}
+
+\aistatsaddress{}
+]
+
+\section{Identification Proofs}
+
+\subsection{Observable information}
+
+Let
+\[
+ B_{s,b}(p)=\binom bs p^s(1-p)^{b-s},
+ \qquad s=0,\ldots,b,
+\]
+be the degree-\(b\) Bernstein basis. If \(S\mid P=p\) is binomial, then
+\(\Pr(S=s)=\int B_{s,b}(p)dF(p)\).
+
+\begin{proof}[Proof of Proposition 1]
+The \(b+1\) Bernstein polynomials form a basis for \(\Pcal_b\). Hence the
+count probabilities determine the integral of every polynomial in
+\(\Pcal_b\). Conversely, every linear functional of the count probabilities
+is the expectation of a polynomial in their span, so no other linear
+functional of \(F\) is directly determined.
+
+For \(k\leq b\), conditional on \(S=s\), the probability that a uniformly
+chosen subset of \(k\) observed attempts contains at least one success is
+\[
+ \widehat h_k(s)=1-\frac{\binom{b-s}{k}}{\binom bk},
+\]
+with the ratio defined as zero when \(b-s<k\). Conditional exchangeability
+gives \(\E_p[\widehat h_k(S)]=1-(1-p)^k\). Averaging over tasks and \(F\)
+proves unbiasedness.
+
+For \(k>b\), \(h_k(p)=1-(1-p)^k\) has degree \(k\) and is not in
+\(\Pcal_b\). Theorem 1 constructs two laws that agree on every element of
+\(\Pcal_b\) but disagree on \(h_k\), proving nonidentification in general.
+\end{proof}
+
+\subsection{The identified interval for fixed moments}
+
+For a feasible moment vector
+\(\mu=(\mu_0,\ldots,\mu_b)\), define
+\[
+ \mathcal F(\mu)=
+ \left\{F:\int p^j\,dF(p)=\mu_j,\ j=0,\ldots,b\right\}.
+\]
+The set is weakly compact because probability measures on \([0,1]\) are
+weakly compact and the moment constraints are continuous. The functional
+\(F\mapsto\int h_kdF\) is continuous, so its minimum and maximum over
+\(\mathcal F(\mu)\) exist. Convexity implies that every value between the
+two endpoints is attained.
+
+The lower primal problem and its generalized moment dual are
+\begin{align*}
+\inf_{F\in\mathcal F(\mu)}\int h_k\,dF
+\quad\text{and}\quad
+\sup_{q\in\Pcal_b}
+\left\{\sum_{j=0}^bq_j\mu_j:q\leq h_k\right\}.
+\end{align*}
+The upper pair reverses the optimization and the envelope. Feasibility and
+compact support give equality of primal and dual values
+\citep{deklerk2019,halaseh2026}. A dual envelope need not attain its optimum
+when \(\mu\) lies on the boundary of the moment cone. This is why the main
+paper uses a supremum and an infimum.
+
+Because \(h_k-q\) and \(q-h_k\) are univariate polynomials, their
+nonnegativity on \([0,1]\) can also be represented exactly by the
+Markov--Lukacs certificate. If a polynomial \(r\) has even degree \(2d\),
+\[
+ r(p)=\sigma_0(p)+p(1-p)\sigma_1(p),
+\]
+where \(\sigma_0,\sigma_1\) are sums of squares of degrees at most \(2d\) and
+\(2d-2\). If its degree is odd \(2d+1\),
+\[
+ r(p)=p\sigma_0(p)+(1-p)\sigma_1(p),
+\]
+where both sums of squares have degree at most \(2d\). Gram-matrix
+representations turn the endpoint problems into finite semidefinite programs.
+Their size grows with \(k\), so our largest-horizon computations instead use
+linear programs on Chebyshev grids and monotone outer projection.
+
+\subsection{Sharp worst-case diameter}
+
+\begin{proof}[Proof of Theorem 1]
+Set \(X=1-P\). Matching the first \(b\) moments of \(P\) is equivalent to
+matching those of \(X\). Let \(F,G\) be any two such laws and let
+\(q\in\Pcal_b\). Since \(\int q\,d(F-G)=0\),
+\begin{align*}
+\left|\theta_k(F)-\theta_k(G)\right|
+&=\left|\int x^k\,d(F-G)(x)\right|\\
+&=\left|\int(x^k-q(x))\,d(F-G)(x)\right|\\
+&\leq 2\|x^k-q\|_\infty.
+\end{align*}
+Taking the infimum over \(q\) proves \(D_{b,k}\leq2E_{b,k}\).
+
+For the reverse inequality, let \(C=C[0,1]\) with the uniform norm, and
+consider the quotient Banach space \(C/\Pcal_b\). The norm of the coset
+\([x^k]\) is its distance to \(\Pcal_b\), namely \(E_{b,k}\). By
+Hahn--Banach, there is a continuous linear functional \(\Lambda\) on \(C\)
+with operator norm one such that
+\[
+ \Lambda(q)=0\quad(q\in\Pcal_b),\qquad
+ \Lambda(x^k)=E_{b,k}.
+\]
+The Riesz representation theorem gives a finite signed measure \(\nu\) with
+total variation one and \(\Lambda(f)=\int f\,d\nu\). Since the constant
+function lies in \(\Pcal_b\), \(\nu([0,1])=0\). In the Jordan decomposition
+\(\nu=\nu^+-\nu^-\), both parts therefore have mass \(1/2\).
+
+Define probability measures \(F^\star=2\nu^+\) and
+\(G^\star=2\nu^-\). They match every polynomial of degree at most \(b\), and
+\[
+ \int x^k\,d(F^\star-G^\star)=2E_{b,k}.
+\]
+Their count laws match by the Bernstein representation. Their pass@\(k\)
+values have the same absolute gap because the constant part of
+\(1-x^k\) cancels. Thus \(D_{b,k}\geq2E_{b,k}\).
+\end{proof}
+
+\subsection{Newman--Rivlin mapping}
+
+\begin{proof}[Proof of Corollary 1]
+Let \(E_n^{[-1,1]}(f)\) denote best degree-\(n\) uniform approximation on
+\([-1,1]\). If \(q\in\Pcal_b\), then \(q(z^2)\) is an even degree-\(2b\)
+polynomial and
+\[
+ \sup_{z\in[-1,1]}|z^{2k}-q(z^2)|
+ =\sup_{x\in[0,1]}|x^k-q(x)|.
+\]
+Conversely, symmetrizing any degree-\(2b\) approximant to the even function
+\(z^{2k}\) cannot increase its error. The resulting even polynomial is
+\(q(z^2)\) for a \(q\in\Pcal_b\). Hence
+\[
+ E_{b,k}=E_{2b}^{[-1,1]}(z^{2k}).
+\]
+
+Theorem 3 of \citet{newman1976} states that
+\[
+ \frac{1}{4e}P_{n,m}\leq E_m^{[-1,1]}(z^n)\leq P_{n,m},
+\]
+where \(P_{n,m}\) is the probability that the absolute difference between
+heads and tails in \(n\) fair tosses exceeds \(m\). With \(n=2k,m=2b\),
+that event is \(|H-k|>b\) for
+\(H\sim\operatorname{Binomial}(2k,1/2)\). Multiplication by two and Theorem 1
+give the displayed bounds.
+
+For large \(k\), the standardized threshold is
+\(b/\sqrt{k/2}=\sqrt{2}b/\sqrt{k}\). The central limit theorem therefore
+places the transition at \(b/\sqrt{k}\) of constant order. If
+\(b/\sqrt{k}\to\infty\), the tail and diameter vanish. If that ratio remains
+bounded, the lower bound stays away from zero along nondegenerate limits.
+\end{proof}
+
+\subsection{Declared support restrictions}
+
+\begin{proof}[Proof of Corollary 2]
+Under \(P\in[p_0,1]\), set \(X=1-P\in[0,a]\) with \(a=1-p_0\). If \(a=0\),
+the target is constant and the claim is immediate. Otherwise write \(X=aY\).
+The map from laws of \(X\) to laws of \(Y\in[0,1]\) is bijective. Matching
+degree-\(b\) moments is preserved under this scaling, and
+\[
+ \left|\E_FX^k-\E_GX^k\right|
+ =a^k\left|\E_FY^k-\E_GY^k\right|.
+\]
+Taking the supremum over matching laws and applying Theorem 1 gives
+\(D_{b,k}(p_0)=a^kD_{b,k}\).
+\end{proof}
+
+\section{Confidence-Set Lower Bounds}
+
+\subsection{Exactly matching count laws}
+
+\begin{proof}[First part of Theorem 2]
+Let \(A_F=\{\theta_k(F)\in C\}\) and
+\(A_G=\{\theta_k(G)\in C\}\). Under a shared data law,
+\[
+ \Pr(A_F\cap A_G)
+ \geq1-\Pr(A_F^c)-\Pr(A_G^c)\geq1-2\alpha.
+\]
+On the intersection, \(C\) contains two points separated by \(\Delta\), so
+its diameter is at least \(\Delta\). The expected-length claim follows from
+\(\E[\diam(C)]\geq\Delta\Pr\{\diam(C)\geq\Delta\}\).
+\end{proof}
+
+\subsection{Nearby finite-task experiments}
+
+\begin{lemma}[Affinity bound]
+For probability mass functions \(q,r\), define
+\(\rho(q,r)=\sum_s\sqrt{q_sr_s}\). Then
+\[
+ \TV(q,r)\leq\sqrt{1-\rho(q,r)^2}.
+\]
+For \(M\) iid observations,
+\(\rho(q^M,r^M)=\rho(q,r)^M\).
+\end{lemma}
+
+\begin{proof}
+Cauchy--Schwarz gives
+\begin{align*}
+\TV(q,r)
+&=\frac12\sum_s|\sqrt{q_s}-\sqrt{r_s}|
+                    (\sqrt{q_s}+\sqrt{r_s})\\
+&\leq\frac12
+\sqrt{\sum_s(\sqrt{q_s}-\sqrt{r_s})^2}
+\sqrt{\sum_s(\sqrt{q_s}+\sqrt{r_s})^2}\\
+&=\sqrt{(1-\rho(q,r))(1+\rho(q,r))}.
+\end{align*}
+The product identity follows by factorizing the sum over product outcomes.
+\end{proof}
+
+\begin{proof}[Finite-task part of Theorem 2]
+Let \(P_F,P_G\) denote the two full data laws. Coverage and total variation
+give
+\begin{align*}
+ P_F(A_G)
+ &\geq P_G(A_G)-\TV(P_F,P_G)\\
+ &\geq1-\alpha-\TV(P_F,P_G).
+\end{align*}
+Combining this with \(P_F(A_F)\geq1-\alpha\) yields
+\[
+ P_F(A_F\cap A_G)\geq1-2\alpha-\TV(P_F,P_G).
+\]
+The preceding lemma bounds the final term by
+\(\sqrt{1-\rho(q_F,q_G)^{2M}}\). On the intersection the interval spans the
+target gap.
+\end{proof}
+
+\subsection{Convex modulus program and repair}
+
+On support points \(p_1,\ldots,p_J\), let \(w,z\) be two vectors in the
+probability simplex. Define the \((b+1)\times J\) matrix
+\[
+ A_{sj}=\binom bs p_j^s(1-p_j)^{b-s}
+\]
+and \(t_j=h_k(p_j)\). For a desired product-TV budget \(v\), the
+grid-restricted program is
+\begin{align*}
+\text{maximize}\quad &t^\top(w-z)\\
+\text{subject to}\quad
+&w,z\geq0,\quad\mathbf1^\top w=\mathbf1^\top z=1,\\
+&\sum_{s=0}^b\sqrt{(Aw)_s(Az)_s}
+\geq(1-v^2)^{1/(2M)}.
+\end{align*}
+The affinity is concave in \((w,z)\), so its superlevel set is convex. The
+objective is linear. Any feasible solution is an actual pair of mixing laws,
+and therefore a valid lower-bound witness for the unrestricted modulus.
+
+Numerical solvers can return weights with tiny negative entries or affinity
+slightly below the requested value. We first clip negative weights and
+renormalize. Let \(m=(w+z)/2\) and \(d=(w-z)/2\). We then replace the pair by
+\[
+ w_\lambda=m+\lambda d,\qquad z_\lambda=m-\lambda d,
+ \qquad0\leq\lambda\leq1.
+\]
+At \(\lambda=0\), the two laws coincide and have affinity one. We use
+bisection to select the largest feasible \(\lambda\), followed by a relative
+\(10^{-10}\) shrinkage. Every reported target gap is recomputed from this
+repaired pair. Thus solver optimality labels do not affect validity of the
+lower bounds.
+
+\begin{table*}[t]
+\caption{Finite-task modulus witnesses for \(M=128,b=78,\alpha=0.05\).
+All displayed product-TV bounds are at most the requested \(v\).}
+\label{tab:modulus-full}
+\centering
+\small
+\begin{tabular}{rrrrrr}
+\toprule
+\(k\) & \(v\) & target gap & span probability & expected-length lower & solver label\\
+\midrule
+100 & .05 & .00531 & .850 & .00451 & optimal-inaccurate\\
+100 & .10 & .01063 & .800 & .00850 & optimal\\
+100 & .20 & .02139 & .700 & .01497 & optimal\\
+100 & .30 & .03246 & .600 & .01948 & optimal\\
+100 & .40 & .04407 & .500 & .02203 & optimal\\
+\midrule
+1,000 & .05 & .28233 & .850 & .23998 & optimal-inaccurate\\
+1,000 & .10 & .33187 & .800 & .26549 & optimal-inaccurate\\
+1,000 & .20 & .39457 & .700 & .27620 & optimal-inaccurate\\
+1,000 & .30 & .44060 & .600 & .26436 & optimal-inaccurate\\
+1,000 & .40 & .47946 & .500 & .23973 & optimal-inaccurate\\
+\midrule
+10,000 & .05 & .80759 & .850 & .68645 & optimal-inaccurate\\
+10,000 & .10 & .83681 & .800 & .66945 & optimal-inaccurate\\
+10,000 & .20 & .86959 & .700 & .60871 & optimal-inaccurate\\
+10,000 & .30 & .89134 & .600 & .53480 & optimal-inaccurate\\
+10,000 & .40 & .90786 & .500 & .45393 & optimal-inaccurate\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Adaptive policies}
+
+\begin{proof}[Proof of Proposition 2]
+Condition on the policy's external random seed, so its decisions are
+deterministic functions of the observed transcript. Consider any finite
+transcript compatible with the policy. For task \(i\), suppose it contains
+\(t_i\leq b\) observations with \(s_i\) successes. Integrating its latent
+probability gives the history probability
+\[
+ \int p^{s_i}(1-p)^{t_i-s_i}\,dF(p).
+\]
+The integrand has degree \(t_i\leq b\), so this value is unchanged when
+\(F\) is replaced by a law \(G\) with matching first \(b\) moments. Latent
+task probabilities are independent, hence the probability of the collection
+of task histories is the product of these integrals. Policy decisions add
+only indicators that the transcript follows the deterministic rule.
+Therefore every complete transcript has the same probability under \(F\)
+and \(G\). Averaging over the external random seed proves the claim for a
+randomized policy.
+\end{proof}
+
+\section{Honest Interval Constructions}
+
+\subsection{Global Bernstein interval}
+
+\begin{theorem}
+Fix arbitrary \(p_1,\ldots,p_M\in[0,1]\), and independently draw
+\(S_i\sim\operatorname{Binomial}(b,p_i)\). If
+\(\|q-h_k\|_\infty\leq\epsilon\), where
+\[
+ q(p)=\sum_{s=0}^ba_sB_{s,b}(p),
+\]
+and \(R=\max_sa_s-\min_sa_s\), then the global polynomial interval in the main
+paper covers
+\[
+ \theta_{M,k}=\frac1M\sum_{i=1}^Mh_k(p_i)
+\]
+with probability at least \(1-\alpha\). If instead \(P_i\) are iid from \(F\),
+the same interval also covers population \(\theta_k(F)\) with that probability.
+\end{theorem}
+
+\begin{proof}
+Let \(\bar a=M^{-1}\sum_i a_{S_i}\). The Bernstein identity gives
+\[
+ \E[\bar a]=\frac1M\sum_iq(p_i).
+\]
+The deterministic approximation error therefore satisfies
+\[
+ |\E[\bar a]-\theta_{M,k}|\leq\epsilon.
+\]
+Each \(a_{S_i}\) lies in an interval of length \(R\). Hoeffding's inequality
+for independent, not necessarily identically distributed variables yields
+\[
+ \Pr\{|\bar a-\E\bar a|>Rc_M\}\leq
+ 2\exp(-2Mc_M^2)=\alpha.
+\]
+The triangle inequality gives coverage before clipping, and intersecting with
+\([0,1]\) cannot remove the target.
+
+For iid tasks, the mixture counts \(S_i\) are iid and
+\(\E[a_{S_i}]=\int q(p)dF(p)\). Repeating the same approximation and
+concentration argument gives population coverage.
+\end{proof}
+
+\paragraph{Design program.}
+On evaluation points \(u_\ell\), the implemented linear program minimizes
+\[
+ \epsilon+c_M(a_{\max}-a_{\min})
+\]
+over \(a_0,\ldots,a_b,\epsilon,a_{\min},a_{\max}\), subject to
+\[
+ |q(u_\ell)-h_k(u_\ell)|\leq\epsilon,\qquad
+ a_{\min}\leq a_s\leq a_{\max}.
+\]
+After solving, we certify the continuous error. The Bernstein derivative
+identity gives
+\[
+q'(p)=b\sum_{s=0}^{b-1}(a_{s+1}-a_s)B_{s,b-1}(p),
+\]
+so \(|q'(p)|\leq b\Delta_a\), where
+\(\Delta_a=\max_s|a_{s+1}-a_s|\). Also
+\(h_k'(p)=k(1-p)^{k-1}\), which decreases in \(p\). On adjacent grid points
+\(u_\ell,u_{\ell+1}\), every \(p\) is within half the interval width of an
+endpoint. Hence the continuous error on that interval is at most
+\begin{align*}
+\max\{&
+|q(u_\ell)-h_k(u_\ell)|,\,
+|q(u_{\ell+1})-h_k(u_{\ell+1})|\}\\
+&+\frac{u_{\ell+1}-u_\ell}{2}
+\left[k(1-u_\ell)^{k-1}+b\Delta_a\right].
+\end{align*}
+We use the maximum of these bounds plus \(10^{-10}\) as \(\epsilon\).
+
+\paragraph{Asymptotic sharpness.}
+In the ideal continuous design problem, every feasible polynomial has
+\(\epsilon\geq E_{b,k}\). Conversely, for any \(\eta>0\), choose a polynomial
+with error at most \(E_{b,k}+\eta\). Its finite Bernstein coefficient range is
+multiplied by \(c_M\to0\). Therefore the optimized half-width converges to
+\(E_{b,k}\), and the full worst-case width converges to
+\(2E_{b,k}=D_{b,k}\).
+
+\subsection{Count-CDF projection interval}
+
+For thresholds \(s=0,\ldots,b-1\), write
+\[
+ g_s(p)=\Pr\{\operatorname{Binomial}(b,p)\leq s\}.
+\]
+This function is decreasing in \(p\). The pass target \(h_k(p)\) is
+increasing.
+
+\begin{theorem}
+For iid tasks from \(F\), use radius
+\[
+ \delta_{\rm iid}=\sqrt{\frac{\log(2/\alpha)}{2M}}.
+\]
+For fixed \(p_1,\ldots,p_M\) with independent counts, use
+\[
+ \delta_{\rm fix}=\sqrt{\frac{\log(2b/\alpha)}{2M}}.
+\]
+The endpoint-envelope linear program in the main paper gives a
+\((1-\alpha)\) outer confidence interval for \(\theta_k(F)\) in the iid case,
+and for \(\theta_{M,k}\) in the fixed case.
+\end{theorem}
+
+\begin{proof}
+In the iid case, the counts \(S_i\) are iid draws from the mixture count CDF
+\(G_s=\int g_s(p)dF(p)\). The DKW inequality
+\citep{massart1990} gives
+\[
+ \Pr\left\{\max_s|\widehat G_s-G_s|>\delta_{\rm iid}\right\}
+\leq\alpha.
+\]
+
+In the fixed case,
+\(\mathbf1\{S_i\leq s\}\) are independent variables in \([0,1]\), with
+average expectation
+\[
+ G_{M,s}=\frac1M\sum_i g_s(p_i).
+\]
+For each threshold, Hoeffding's inequality gives a two-sided error probability
+at most \(2\exp(-2M\delta^2)\). A union bound over the \(b\) nontrivial
+thresholds gives the stated radius.
+
+It remains to prove projection validity on either simultaneous-band event.
+Let \(F_\star\) be \(F\) in the iid setting and the empirical law
+\(M^{-1}\sum_i\delta_{p_i}\) in the fixed setting. On a partition
+\([e_j,e_{j+1}]\), set \(w_j=F_\star([e_j,e_{j+1}])\), with a fixed convention
+at shared endpoints. Monotonicity gives
+\[
+ \sum_jw_jg_s(e_{j+1})
+ \leq\int g_s\,dF_\star
+ \leq\sum_jw_jg_s(e_j).
+\]
+Combining these inequalities with the confidence band shows that the true
+bin masses are feasible for the linear constraints. A second use of
+monotonicity gives
+\[
+ \sum_jw_jh_k(e_j)
+ \leq\int h_k\,dF_\star
+ \leq\sum_jw_jh_k(e_{j+1}).
+\]
+The minimized lower envelope can only be smaller than the left side, and the
+maximized upper envelope can only be larger than the right side. The projected
+interval therefore contains the target on the simultaneous-band event.
+\end{proof}
+
+\paragraph{Numerical conditioning.}
+To compute the upper endpoint, maximizing \(h_k\) is implemented as minimizing
+the failure probability \((1-p)^k\), then subtracting the optimum from one.
+This avoids an objective numerically indistinguishable from the constant
+one at large \(k\). Each endpoint first uses HiGHS, then retries its dual
+simplex and interior-point methods at a relaxed \(10^{-8}\) feasibility
+tolerance. Every reported run completed successfully after this
+reparameterization.
+
+\section{Numerical Identification Results}
+
+\begin{table}[t]
+\caption{Worst-case population identification. Grid-based approximation and
+moment-pair programs agree at the displayed precision.}
+\label{tab:diameters}
+\centering
+\small
+\begin{tabular}{rrrr}
+\toprule
+\(b\) & \(k\) & approx.\ \(D_{b,k}\) & max moment resid.\\
+\midrule
+4  & 128    & .6677 & \(2.1\times10^{-15}\)\\
+8  & 1,000  & .7833 & \(5.7\times10^{-12}\)\\
+16 & 1,000  & .5086 & \(5.1\times10^{-15}\)\\
+32 & 10,000 & .7066 & \(4.3\times10^{-12}\)\\
+64 & 10,000 & .3886 & \(1.6\times10^{-14}\)\\
+78 & 1,000  & .000489 & \(8.2\times10^{-11}\)\\
+78 & 10,000 & .28495 & \(7.3\times10^{-13}\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The \(b=78,k=100\) error is below double-precision resolution. We do not use
+the numerical zero as a theorem. Corollary 1 gives the rigorous bound
+\[
+ 3.58\times10^{-33}\leq D_{78,100}
+ \leq3.89\times10^{-32}.
+\]
+
+\begin{table*}[t]
+\caption{Atomic laws for the \(b=8,k=1000\) ambiguity example. Weights shown
+here are rounded. The artifact stores full precision.}
+\label{tab:atoms}
+\centering
+\small
+\begin{tabular}{rrrr}
+\toprule
+\multicolumn{2}{c}{High pass@1000 law} &
+\multicolumn{2}{c}{Low pass@1000 law}\\
+\(p\) & weight & \(p\) & weight\\
+\midrule
+.002934 & .940617 & .000000 & .833112\\
+.149794 & .038257 & .041906 & .134095\\
+.501963 & .011496 & .311564 & .018474\\
+.854108 & .006747 & .692430 & .008329\\
+1.000000 & .002882 & .962090 & .005991\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+At full precision, the two induced count probability vectors differ by at
+most \(1.7\times10^{-12}\). Their target values are \(0.9501871171\) and
+\(0.1668880229\). Their stored degree-\(b\) Chebyshev moment residual is
+\(5.7\times10^{-12}\). For this ambiguity example, the numerical primal and
+dual diameters differ by less than \(10^{-11}\).
+
+\section{Experiment Protocols and Additional Results}
+
+\subsection{Synthetic interval audit}
+
+Each repetition first samples 128 latent task probabilities from the specified
+discrete or Beta law. It then samples one binomial count per task. Coverage is
+evaluated against the realized finite-task target
+\[
+ \theta_{M,k}=M^{-1}\sum_{i=1}^M[1-(1-p_i)^k].
+\]
+This makes the comparison conditional on the sampled benchmark and matches
+the fixed-task guarantee of both honest intervals.
+
+The exact pair is the law in Table~\ref{tab:atoms}. Finite-pair laws are the
+repaired \(v=0.2\) modulus witnesses for \(b=78,k\in\{1000,10000\}\).
+The benign laws are \(\operatorname{Beta}(1,1)\) and
+\(\operatorname{Beta}(0.35,5)\), discretized by 20,001 equal-mass midpoint
+quantiles for simulation.
+
+For each taskwise Bayesian interval, the posterior is
+\[
+ p_i\mid S_i\sim\operatorname{Beta}(S_i+1,b-S_i+1).
+\]
+We use 2,000 independent joint posterior draws, compute the task-average
+pass@\(k\) for each draw, and take its 2.5\% and 97.5\% quantiles. The
+posterior mean is computed analytically. Population Beta point estimates use
+a ten-start Beta-binomial maximum-likelihood fit in log parameters. We also
+report the direct plug-in and the clipped binomial smoothed Good--Toulmin
+point estimates.
+
+\begin{table*}[t]
+\caption{Synthetic 95\% interval audit over 400 repetitions per scenario.
+``Task B.'' is taskwise Beta, ``Projection'' is fixed-task count-CDF
+projection, and ``Global'' is the Bernstein interval.}
+\label{tab:synthetic-full}
+\centering
+\small
+\begin{tabular}{llrrrr}
+\toprule
+Scenario & Method & coverage & mean width & MAE & repetitions\\
+\midrule
+Uniform, \(b=78,k=1000\) & Task B. & .9625 & .0059 & .0011 & 400\\
+ & Projection & 1.0000 & .1901 & .0941 & 400\\
+ & Global & 1.0000 & .7523 & .2606 & 400\\
+\midrule
+Rare Beta, \(b=78,k=1000\) & Task B. & .0000 & .0379 & .1233 & 400\\
+ & Projection & 1.0000 & .5470 & .1224 & 400\\
+ & Global & 1.0000 & .8056 & .1637 & 400\\
+\midrule
+Exact low, \(b=8,k=1000\) & Task B. & .0000 & .0210 & .8235 & 400\\
+ & Projection & 1.0000 & 1.0000 & .3318 & 400\\
+ & Global & 1.0000 & 1.0000 & .3318 & 400\\
+Exact high, \(b=8,k=1000\) & Task B. & .0000 & .0210 & .0415 & 400\\
+ & Projection & 1.0000 & .9999 & .4502 & 400\\
+ & Global & 1.0000 & 1.0000 & .4503 & 400\\
+\midrule
+Finite first, \(b=78,k=1000\) & Task B. & .0000 & .0549 & .1384 & 400\\
+ & Projection & 1.0000 & .9472 & .2792 & 400\\
+ & Global & 1.0000 & .9531 & .2670 & 400\\
+Finite second, \(b=78,k=1000\) & Task B. & .0000 & .0551 & .5350 & 400\\
+ & Projection & 1.0000 & .9490 & .1165 & 400\\
+ & Global & 1.0000 & .9540 & .1285 & 400\\
+\midrule
+Finite first, \(b=78,k=10000\) & Task B. & .0000 & .0198 & .0204 & 400\\
+ & Projection & 1.0000 & 1.0000 & .4722 & 400\\
+ & Global & 1.0000 & 1.0000 & .4722 & 400\\
+Finite second, \(b=78,k=10000\) & Task B. & .0000 & .0198 & .8900 & 400\\
+ & Projection & 1.0000 & 1.0000 & .3974 & 400\\
+ & Global & 1.0000 & 1.0000 & .3974 & 400\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+The honest intervals' empirical coverage of one is consistent with their
+guarantees but should not be interpreted as exact calibration. Their
+concentration radii are conservative at \(M=128\). The comparison of widths
+is the relevant positive result: the projection interval adapts substantially
+under Uniform and rare Beta laws, while retaining the required width on hard
+pairs.
+
+\subsection{Public response-bank audit}
+
+\paragraph{Data provenance.}
+We use the correctness indicators from all 22 configurations of
+\texttt{ScalingIntelligence/monkey\_business}, the response-bank release of
+\citet{brown2024}. The Hugging Face dataset revision observed during the
+audit was
+\texttt{a9f8f73bcd6948a57ed922cba4e48062ef95f553}. Its dataset card declares
+the MIT license. We fetch only the \texttt{is\_corrects} and original task
+index columns from the hosted Parquet shards, sort by original task index, and
+store Boolean arrays plus source URLs. The 22 panels contain 127--140 tasks
+and 10,000 attempts per task.
+
+\paragraph{References and resampling.}
+For a response bank with \(N=10000\) attempts and \(c_i\) successful attempts
+on task \(i\), the finite-bank pass reference is
+\[
+ \widehat\theta_k=
+ \frac1M\sum_{i=1}^M\left[
+ 1-\frac{\binom{N-c_i}{k}}{\binom Nk}\right].
+\]
+This is the expected without-replacement pass@\(k\) of a uniformly sampled
+subset from the bank. For each of 50 seeds, we independently shuffle each
+task's responses. Equal allocation uses the first
+\(\lfloor B/M\rfloor\) responses per task. Dynamic allocation implements
+Algorithm 1 of \citet{kazdan2025}: it initializes each task, then allocates
+attempts according to the prescribed function of failures and successes. The
+nominal budgets are 1,000, 3,000, and 10,000. Targets are 100, 1,000, and
+10,000.
+
+\paragraph{Population Beta fit.}
+Given possibly unequal \(b_i\) and counts \(s_i\), the likelihood is
+\[
+ \prod_i
+ \binom{b_i}{s_i}
+ \frac{\mathrm B(s_i+\alpha,b_i-s_i+\beta)}
+      {\mathrm B(\alpha,\beta)}.
+\]
+The combinatorial factors do not affect optimization. We optimize
+\(\log\alpha,\log\beta\) with analytic gradients from ten starting points,
+using bounds \([-14,18]\) on both log parameters. Boundary fits are retained
+and flagged. Forecasts use
+\[
+ 1-\frac{\mathrm B(\alpha,\beta+k)}
+          {\mathrm B(\alpha,\beta)}.
+\]
+All 59,400 forecast rows used in the main point-estimate audit have finite
+objectives. The artifact preserves convergence, gradient, and boundary
+diagnostics.
+
+\begin{table}[t]
+\caption{Uniform-allocation public point forecasts at total budget 10,000.
+Each row contains 1,100 panel-resamples.}
+\label{tab:public-full}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llrrr}
+\toprule
+\(k\) & method & MAE & RMSE & fraction \(>|.1|\)\\
+\midrule
+100 & Population Beta & .0175 & .0225 & .000\\
+100 & SGT & .0161 & .0223 & .000\\
+100 & Plug-in & .0396 & .0516 & .055\\
+100 & Taskwise Beta & .2901 & .3451 & .729\\
+\midrule
+1,000 & Population Beta & .0414 & .0558 & .092\\
+1,000 & SGT & .2000 & .2764 & .605\\
+1,000 & Plug-in & .1481 & .1845 & .511\\
+1,000 & Taskwise Beta & .3843 & .4846 & .682\\
+\midrule
+10,000 & Population Beta & .0697 & .1300 & .170\\
+10,000 & SGT & .3529 & .4688 & .713\\
+10,000 & Plug-in & .2365 & .2869 & .737\\
+10,000 & Taskwise Beta & .3326 & .4489 & .682\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Fixed-task projection audit over 22 panels and 50 resamples.}
+\label{tab:projection-public}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{rrrrr}
+\toprule
+\(k\) & ref.\ inclusion & mean width & median width & width \(>.9\)\\
+\midrule
+100 & 1.000 & .371 & .395 & .000\\
+1,000 & 1.000 & .714 & .787 & .405\\
+10,000 & 1.000 & .721 & .787 & .405\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Reference inclusion is not a frequentist coverage estimate. The full bank is
+finite, contains the sampled prefix, and estimates rather than equals a latent
+target. We report it as a reproducible descriptive check. The synthetic study
+provides the controlled coverage experiment.
+
+\subsection{Compute and software}
+
+All optimization and data experiments ran in Python 3.10 on Argonne Swing.
+CPU computations were submitted to a GPU-only PBS queue but do not use the
+allocated accelerator. Core packages are NumPy, SciPy 1.15.3, pandas,
+Matplotlib, CVXPY, Clarabel, PyArrow, and fsspec. Four spawned workers run the
+coverage and projection audits with all BLAS thread counts set to one.
+
+The full 400-repetition synthetic audit took 2 minutes 41 seconds on one node.
+The 3,300-row public projection audit took 2 minutes 16 seconds. The artifact
+uses fixed seeds, writes outputs only after all worker results return, and
+contains ten deterministic tests. Tests cover the combinatorial estimator,
+dynamic allocation, Beta-binomial recovery, taskwise posterior computation,
+smoothed Good--Toulmin interpolation, identification primal-dual agreement,
+continuous bias certification, finite-modulus feasibility, and projection
+containment.
+
+\section{Additional Literature Boundary}
+
+The closest statistical model predates pass@\(k\). \citet{colwell2004} use the
+same incidence binomial mixture and accumulation functional. They recommend
+moment interpolation, fit finite mixtures for extrapolation, and caution that
+the asymptote is unreliable. \citet{orlitsky2016} derive minimax smoothed
+Good--Toulmin estimators in both abundance and Bernoulli-product incidence
+models. Their estimable extrapolation factor grows logarithmically with sample
+size. Our work addresses a different quantity: the exact finite-\(b\)
+identified diameter, finite-task interval lower bounds, and honest pass@\(k\)
+projection.
+
+\citet{mao2007} show that unseen-class odds in a zero-truncated Poisson
+mixture are discontinuous and that uniformly informative two-sided inference
+for total richness is impossible. That target is unbounded and asymptotic.
+Our finite-horizon target remains in \([0,1]\), producing a bounded but
+nontrivial ambiguity that changes continuously with \(b\) and \(k\).
+\citet{daley2013} use rational continuation for sequencing-library complexity,
+while \citet{shestopaloff2025} fits parametric accumulation-rate tails and
+uses a parametric bootstrap. Both demonstrate that structural continuation
+can be practically effective.
+
+\citet{basu2026} give exact pointwise CDF and quantile intervals for a
+binomial mixing distribution by test inversion. They explicitly discuss the
+finite-moment identification boundary. They do not study the pass@\(k\)
+functional, its sharp diameter, or the \(b^2\) horizon.
+\citet{kaido2019} provide generic asymptotically calibrated projection
+intervals for partially identified moment models. Our count-CDF interval is a
+specialized nonasymptotic outer projection whose validity follows from DKW or
+finite Hoeffding bands and monotone bin endpoints.
+
+Recent pass@\(k\) papers impose useful structure rather than study
+nonparametric identification. \citet{schaeffer2025} explain aggregate power
+laws through heavy lower tails. \citet{levi2025} derive the same curve under a
+Beta failure model, while \citet{levi2026} connect a regularly varying
+difficulty tail to training-dependent inference scaling. \citet{kazdan2025}
+propose population Beta-binomial fitting and dynamic allocation.
+\citet{tailpass2026} propagate taskwise Beta or Dirichlet posteriors through
+richer repeated-sampling profiles. \citet{hariri2026} use taskwise Bayesian
+inference to stabilize model evaluation. Our audits target the extrapolative
+assumptions in these population and taskwise models, not their within-model
+posterior algebra. A separate diagnostic by \citet{zhou2026} shows that a
+deterministic intervention can reach some tasks missed by ordinary sampling.
+That result concerns the choice of decoding regime, not extrapolation from a
+fixed regime's finite count law.
+
+\balance
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,133 @@
+\begin{thebibliography}{}
+
+\bibitem[{Anonymous Authors}, 2026]{tailpass2026}
+{Anonymous Authors} (2026).
+\newblock Success has a shape: {TailPass@k} for repeated-sampling agent
+  evaluation.
+\newblock Manuscript submitted to NeurIPS 2026.
+
+\bibitem[Basu et~al., 2026]{basu2026}
+Basu, P., Brill, B., and Yekutieli, D. (2026).
+\newblock Exact confidence intervals for the mixing distribution from binomial
+  mixture distribution samples.
+\newblock {\em Journal of Computational and Graphical Statistics},
+  35(2):880--890.
+
+\bibitem[Brown et~al., 2024]{brown2024}
+Brown, B., Juravsky, J., Ehrlich, R., Clark, R., Le, Q.~V., R{\'e}, C., and
+  Mirhoseini, A. (2024).
+\newblock Large language monkeys: Scaling inference compute with repeated
+  sampling.
+\newblock {\em arXiv preprint arXiv:2407.21787}.
+
+\bibitem[Chen et~al., 2026]{chen2026}
+Chen, X., Rambachan, A., and Tamer, E. (2026).
+\newblock Partial identification from {LLM} prompts.
+\newblock {\em arXiv preprint arXiv:2606.15031}.
+
+\bibitem[Colwell et~al., 2004]{colwell2004}
+Colwell, R.~K., Mao, C.~X., and Chang, J. (2004).
+\newblock Interpolating, extrapolating, and comparing incidence-based species
+  accumulation curves.
+\newblock {\em Ecology}, 85(10):2717--2727.
+
+\bibitem[Daley and Smith, 2013]{daley2013}
+Daley, T. and Smith, A.~D. (2013).
+\newblock Predicting the molecular complexity of sequencing libraries.
+\newblock {\em Nature Methods}, 10(4):325--327.
+
+\bibitem[de~Klerk and Laurent, 2019]{deklerk2019}
+de~Klerk, E. and Laurent, M. (2019).
+\newblock A survey of semidefinite programming approaches to the generalized
+  problem of moments and their error analysis.
+\newblock In {\em World Women in Mathematics 2018}, pages 17--56. Springer.
+
+\bibitem[Halaseh et~al., 2026]{halaseh2026}
+Halaseh, S., Magron, V., and Skomra, M. (2026).
+\newblock Duality attainment and strict feasibility of the generalized moment
+  problem and its relaxations.
+\newblock {\em arXiv preprint arXiv:2604.15072}.
+
+\bibitem[Hariri et~al., 2026]{hariri2026}
+Hariri, M., Samandar, A., Hinczewski, M., and Chaudhary, V. (2026).
+\newblock Don't pass@k: A {Bayesian} framework for large language model
+  evaluation.
+\newblock In {\em International Conference on Learning Representations}.
+
+\bibitem[Hoeffding, 1963]{hoeffding1963}
+Hoeffding, W. (1963).
+\newblock Probability inequalities for sums of bounded random variables.
+\newblock {\em Journal of the American Statistical Association},
+  58(301):13--30.
+
+\bibitem[Jiao et~al., 2015]{jiao2015}
+Jiao, J., Venkat, K., Han, Y., and Weissman, T. (2015).
+\newblock Minimax estimation of functionals of discrete distributions.
+\newblock {\em IEEE Transactions on Information Theory}, 61(5):2835--2885.
+
+\bibitem[Kaido et~al., 2019]{kaido2019}
+Kaido, H., Molinari, F., and Stoye, J. (2019).
+\newblock Confidence intervals for projections of partially identified
+  parameters.
+\newblock {\em Econometrica}, 87(4):1397--1432.
+
+\bibitem[Kazdan et~al., 2025]{kazdan2025}
+Kazdan, J., Schaeffer, R., Allouah, Y., Sullivan, C., Yu, K., Levi, N., and
+  Koyejo, S. (2025).
+\newblock Efficient prediction of pass@k scaling in large language models.
+\newblock {\em arXiv preprint arXiv:2510.05197}.
+
+\bibitem[Levi, 2026]{levi2026}
+Levi, N. (2026).
+\newblock Learning shrinks the hard tail: Training-dependent inference scaling
+  in a solvable linear model.
+\newblock {\em arXiv preprint arXiv:2601.03764}.
+
+\bibitem[Levi, 2025]{levi2025}
+Levi, N.~I. (2025).
+\newblock A simple model of inference scaling laws.
+\newblock In {\em Proceedings of the 42nd International Conference on Machine
+  Learning}, volume 267 of {\em Proceedings of Machine Learning Research},
+  pages 33984--33998.
+
+\bibitem[Mao and Lindsay, 2007]{mao2007}
+Mao, C.~X. and Lindsay, B.~G. (2007).
+\newblock Estimating the number of classes.
+\newblock {\em The Annals of Statistics}, 35(2):917--930.
+
+\bibitem[Massart, 1990]{massart1990}
+Massart, P. (1990).
+\newblock The tight constant in the {Dvoretzky--Kiefer--Wolfowitz} inequality.
+\newblock {\em The Annals of Probability}, 18(3):1269--1283.
+
+\bibitem[Newman and Rivlin, 1976]{newman1976}
+Newman, D.~J. and Rivlin, T.~J. (1976).
+\newblock Approximation of monomials by lower degree polynomials.
+\newblock {\em Aequationes Mathematicae}, 14:451--455.
+
+\bibitem[Orlitsky et~al., 2016]{orlitsky2016}
+Orlitsky, A., Suresh, A.~T., and Wu, Y. (2016).
+\newblock Optimal prediction of the number of unseen species.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  113(47):13283--13288.
+
+\bibitem[Schaeffer et~al., 2025]{schaeffer2025}
+Schaeffer, R., Kazdan, J., Hughes, J., Juravsky, J., Price, S., Lynch, A.,
+  Jones, E., Kirk, R., Mirhoseini, A., and Koyejo, S. (2025).
+\newblock How do large language monkeys get their power (laws)?
+\newblock In {\em Proceedings of the 42nd International Conference on Machine
+  Learning}, volume 267 of {\em Proceedings of Machine Learning Research},
+  pages 53132--53176.
+
+\bibitem[Shestopaloff, 2025]{shestopaloff2025}
+Shestopaloff, K. (2025).
+\newblock An accumulation rate curve estimator for total species.
+\newblock {\em Environmental and Ecological Statistics}, 32(1):311--345.
+
+\bibitem[Zhou et~al., 2026]{zhou2026}
+Zhou, L., Shah, S., Rodol{\`a}, E., and Dess{\`i}, R. (2026).
+\newblock Hard or just unreached? diagnosing the sampling blind spot in
+  math-reasoning difficulty estimation.
+\newblock {\em arXiv preprint arXiv:2606.19636}.
+
+\end{thebibliography}
