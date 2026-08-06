@@ -22,7 +22,7 @@ $$
 
  Moreover, there are two probability laws attaining this gap while inducing the same complete count distribution.
 
-**Corollary.** For $H\sim\operatorname{Binomial}(2k,1/2)$, let $T_{b,k}=\Pr(|H-k|>b)$. Then 
+**Corollary.** For $H\sim\mathrm{Binomial}(2k,1/2)$, let $T_{b,k}=\Pr(|H-k|>b)$. Then 
 
 $$
  \frac{T_{b,k}}{2e}\leq D_{b,k}\leq 2T_{b,k}. 
