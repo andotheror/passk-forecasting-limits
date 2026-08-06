@@ -11,13 +11,13 @@ Repeated sampling can reveal capabilities and risks that are invisible in one la
 **Theorem.** Let 
 
 $$
- E_{b,k}=\inf_{q\in\mathcal{P}_b}\|x^k-q(x)\|_{\infty,[0,1]}. 
+ E_{b,k}=\inf_{q\in\mathcal{P}_b}\\|x^k-q(x)\\|_{\infty,[0,1]}. 
 $$
 
  Then 
 
 $$
- \sup_{\mu}\{U_k(\mu)-L_k(\mu)\}=D_{b,k}=2E_{b,k}. 
+ \sup_{\mu}\\{U_k(\mu)-L_k(\mu)\\}=D_{b,k}=2E_{b,k}. 
 $$
 
  Moreover, there are two probability laws attaining this gap while inducing the same complete count distribution.
