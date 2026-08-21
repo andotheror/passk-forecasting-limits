@@ -1,10 +1,11 @@
 \begin{thebibliography}{}
 
-\bibitem[{Anonymous Authors}, 2026]{tailpass2026}
-{Anonymous Authors} (2026).
+\bibitem[{Anonymous}, 2026]{tailpass2026}
+{Anonymous} (2026).
 \newblock Success has a shape: {TailPass@k} for repeated-sampling agent
   evaluation.
-\newblock Manuscript submitted to NeurIPS 2026.
+\newblock Project page.
+\newblock NeurIPS 2026 submission.
 
 \bibitem[Basu et~al., 2026]{basu2026}
 Basu, P., Brill, B., and Yekutieli, D. (2026).
@@ -103,7 +104,7 @@ Massart, P. (1990).
 \bibitem[Newman and Rivlin, 1976]{newman1976}
 Newman, D.~J. and Rivlin, T.~J. (1976).
 \newblock Approximation of monomials by lower degree polynomials.
-\newblock {\em Aequationes Mathematicae}, 14:451--455.
+\newblock {\em Aequationes Mathematicae}, 14(3):451--455.
 
 \bibitem[Orlitsky et~al., 2016]{orlitsky2016}
 Orlitsky, A., Suresh, A.~T., and Wu, Y. (2016).
