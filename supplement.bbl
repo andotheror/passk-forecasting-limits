@@ -1,12 +1,5 @@
 \begin{thebibliography}{}
 
-\bibitem[{Anonymous}, 2026]{tailpass2026}
-{Anonymous} (2026).
-\newblock Success has a shape: {TailPass@k} for repeated-sampling agent
-  evaluation.
-\newblock Project page.
-\newblock NeurIPS 2026 submission.
-
 \bibitem[Basu et~al., 2026]{basu2026}
 Basu, P., Brill, B., and Yekutieli, D. (2026).
 \newblock Exact confidence intervals for the mixing distribution from binomial
